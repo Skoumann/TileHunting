@@ -1,16 +1,71 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="theme-color" content="#0b1020"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Live Squadrats Tile Hunter</title>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@tmcw/togeojson@5.9.0/dist/togeojson.umd.js"></script>
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+  <script defer src="app.js"></script>
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
-</body>
+  <div id="map"></div>
 
+  <!-- Top control card -->
+  <div class="panel" id="panel">
+    <div class="card">
+      <div class="row">
+        <div>
+          <label>Upload Squadrats KML (visited tiles)</label>
+          <input id="kmlInput" type="file" accept=".kml,.kmz"/>
+        </div>
+        <div class="flex right">
+          <button id="startBtn" class="primary">▶ Start GPS</button>
+          <button id="stopBtn">⏸ Stop</button>
+        </div>
+      </div>
+      <div class="row-3" style="margin-top:8px;">
+        <div class="switch"><input type="checkbox" id="autoCenter" checked><label for="autoCenter">Auto‑center</label></div>
+        <div class="switch"><input type="checkbox" id="snapZoom" checked><label for="snapZoom">Snap zoom to 17</label></div>
+        <div class="switch"><input type="checkbox" id="showTrace" checked><label for="showTrace">Live trace</label></div>
+      </div>
+      <div class="row" style="margin-top:6px;">
+        <div class="switch"><input type="checkbox" id="showGrid"><label for="showGrid">Show z17 tile grid</label></div>
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <div class="flex">
+          <button id="clearPink" class="danger">Clear pink</button>
+          <button id="exportPink">Export pink</button>
+        </div>
+        <div class="flex right">
+          <span class="tag">📍 <span id="status">GPS idle</span></span>
+        </div>
+      </div>
+      <div class="note" style="margin-top:6px;">
+        Tip: Pink = z17 tiles you cross this session. Teal = KML visited. Use HTTPS for precise GPS.
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom toolbar (mobile-friendly) -->
+  <div class="toolbar" id="toolbar">
+    <button id="togglePanel">☰</button>
+    <button id="installBtn" class="install-btn">Install app</button>
+    <button id="centerBtn">Center on me</button>
+  </div>
+
+  <div class="legend">
+    <div><span class="swatch" style="background: rgba(0,188,212,0.35); border:1px solid #00bcd4;"></span>Visited (KML)</div>
+    <div><span class="swatch" style="background: rgba(255,77,166,0.35); border:1px solid #ff4da6;"></span>Crossed now (pink)</div>
+    <div><span class="swatch" style="background: transparent; border:1px dashed #7aa2ff;"></span>Current z17 outline</div>
+  </div>
+</body>
 </html>

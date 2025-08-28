@@ -1,0 +1,13 @@
+{
+  "name": "Squadrats Tile Hunter",
+  "short_name": "TileHunter",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "description": "Live Squadrats tile hunting with GPS and KML overlay.",
+  "icons": [
+    { "src": "icon.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
